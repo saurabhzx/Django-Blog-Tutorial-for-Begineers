@@ -1,0 +1,17 @@
+<html>
+<head>
+    <title>Welcome to my first Blog </title>
+</head>
+<body>
+    <h1>Post for the blog</h1>
+
+    {% for p in posts %}
+
+    <b>{{p.title}}<b><br/>
+
+    Written by {{p.author.name}} on {{p.date}}<br/> 
+    <p>{{p.body}}<p> 
+
+    {% endfor %}
+</body>
+</html>
