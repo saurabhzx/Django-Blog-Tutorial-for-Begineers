@@ -12,6 +12,19 @@ class AuthorList(generics.ListCreateAPIView):
     queryset = Author.objects.all()
     serializer_class = AuthorSerializer
     permission_classes = (AdminOnly,)
+    
+    def post(self, request, *args, **kwargs):
+        self.serializer_class = AuthorSerializer
+        data = request.DATA
+        serializer = AuthorSerializer(data=data)
+        print serializer.data
+        if serializer.is_valid():
+            serializer.save()
+        else:
+            return Response(serializer.errors,
+                            status=status.HTTP_400_BAD_REQUEST)
+        return Response(serializer.data)
+
 
 class AuthorDetail(generics.RetrieveAPIView):
     model = Author
